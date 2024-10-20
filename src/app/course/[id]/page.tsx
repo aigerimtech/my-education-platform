@@ -30,7 +30,7 @@ const CoursePage: React.FC = () => {
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold text-black mb-6">{course.name}</h1>
       <div className="w-full aspect-video">
-      <iframe width="560" height="315" src={courseVideos[id].playlistUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <iframe width="560" height="315" src={courseVideos[id].playlistUrl} title="YouTube video player" frameBorder={"0"} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
     </div>
   );
 };
