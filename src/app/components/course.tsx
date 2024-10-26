@@ -18,7 +18,7 @@ const coursesData: Course[] = [
   { id: 3, name: 'Python for Beginners', instructor: 'Telusko', rating: 5.0, duration: '5h 45m', price: 49.99, category: 'IT' },
   { id: 4, name: 'Calculus I', instructor: 'Dr. Trefor Bazett', rating: 4.7, duration: '4h 20m', price: 19.99, category: 'Math' },
   { id: 5, name: 'Artificial Intelligence Basics', instructor: 'Gate Smashers', rating: 4.8, duration: '6h 10m', price: 59.99, category: 'IT' },
-  { id: 6, name: 'Data Structures and Algorithms', instructor: 'freeCodeCamp', rating: 4.9, duration: '6h 45m', price: 49.99, category: 'IT' },
+  { id: 6, name: 'Data Structures and Algorithms', instructor: 'William Fiset', rating: 4.9, duration: '5h 45m', price: 49.99, category: 'IT' },
   { id: 7, name: 'Geometry Mastery', instructor: 'Mario Math', rating: 4.6, duration: '2h 50m', price: null, category: 'Math' },
  ];
 

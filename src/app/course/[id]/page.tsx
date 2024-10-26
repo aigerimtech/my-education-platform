@@ -130,6 +130,49 @@ const courseVideos: Record<number, {
       {id:11, title:"Best First Search Algorithm", url:"https://www.youtube.com/embed/7ffDUDjwz5E?si=5ZO2Xv9s7udHugCO"},
       {id:12, title:"Beam Search Algorithm in Artificial Intelligence", url:"https://www.youtube.com/embed/jhoXO1XF6Fk?si=uqb1uPqgujl4NVF7"},  
    ]
+  },
+  6: {
+   name: 'Data Structures and Algorithms',
+   description:"Explore data structures: arrays, linked lists, stack and queue.",
+   playlistUrl: "https://www.youtube.com/embed/videoseries?si=sDus1KkBDtpbyK2T&amp;list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu",
+   instructor: "William Fiset",
+   rating: 4.9,
+   duration: '5h 45m',
+   lectures: [
+      {id:1, title:"Abstract data types", url:"https://www.youtube.com/embed/2USMAwcRWHE?si=tHRhzBdYrfSJDbNA"},
+      {id:2, title:"Introduction to Big-O", url:"https://www.youtube.com/embed/zUUkiEllHG0?si=oNvRRq3qdhne2VgM"},
+      {id:3, title:"Dynamic and Static Arrays", url:"https://www.youtube.com/embed/PEnFFiQe1pM?si=epID50MD80sJHll5"},
+      {id:4, title:"Dynamic Array Code", url:"https://www.youtube.com/embed/tvw4v7FEF1w?si=H1g0atmSP1A4jfeI"},
+      {id:5, title:"Linked Lists Introduction", url:"https://www.youtube.com/embed/-Yn5DU0_-lw?si=o45pZFoGGfGM0F0t"},
+      {id:6, title:"Doubly Linked List Code", url:"https://www.youtube.com/embed/m-8ZBO2ywaU?si=4SkICsrjqDqHqng5"},
+      {id:7, title:"Stack Introduction", url:"https://www.youtube.com/embed/L3ud3rXpIxA?si=nOAgLQZ7Mp0maWFp"},
+      {id:8, title:"Stack Imlementation", url:"https://www.youtube.com/embed/RAMqDLI6_1c?si=Xz7DcbHI_sFsKMiW"},
+      {id:9, title:"Stack Code", url:"https://www.youtube.com/embed/oiZssCfk4_U?si=I_mp4yHkN5JJ-lou"},
+      {id:10, title:"Queue Introduction", url:"https://www.youtube.com/embed/oiZssCfk4_U?si=TQLEvup92BRK3mix"},
+      {id:11, title:"Queue Implementation", url:"https://www.youtube.com/embed/KxzhEQ-zpDc?si=iGTCtExvAM6ow3LP"},
+      {id:12, title:"Queue Code", url:"https://www.youtube.com/embed/EoisnPvUkOA?si=49mQ2jV0NhqKi_iK"},  
+   ]
+  },
+  7: {
+   name: "Geometry Mastery",
+   description: "Fundamental geometric concepts, including polygons, transformations, circle theorems, and their proofs.",
+   playlistUrl:"https://www.youtube.com/embed/videoseries?si=4a5H3yzu1E4n0S3s&amp;list=PLHRatQsym1_iuv4HWg_08K1aRlaS4cSI-",
+   instructor:"Mario Math",
+   rating: 4.6,
+   duration: '2h 50m',
+   lectures: [
+      {id:1, title:"Points, Lines, and Planes", url:"https://www.youtube.com/embed/MD1Ob370TIA?si=JVCPDo-FyHActBeo"},
+      {id:2, title:"Conditional Statements, Inductive & Deductive Reasoning", url:"https://www.youtube.com/embed/jad9rDsJtG4?si=vbLCyVMFyZu_hroS"},
+      {id:3, title:"Parallel Lines Cut by a Transversal", url:"https://www.youtube.com/embed/cBYRJLzDDlA?si=8GzU1dDCiWDxUJpK"},
+      {id:4, title:"Triangle Congruence - SSS, SAS, ASA, AAS, HL", url:"https://www.youtube.com/embed/tTTtSueRnu0?si=-W0Tu6Hcl2RloEyW"},
+      {id:5, title:"Transformations, Translations, Reflections, Rotations", url:"https://www.youtube.com/embed/2JUDUCKCH2s?si=3LYttl_o427eI3st"},
+      {id:6, title:"Bisectors, Medians, Altitudes and Inequalities", url:"https://www.youtube.com/embed/MGW8fb2HDLY?si=9Gqno8pADuyIYlzw"},
+      {id:7, title:"Polygons & Quadrilaterals", url:"https://www.youtube.com/embed/3ANVm7XFIpg?si=s2o-LumgADjm3jUx"},
+      {id:8, title:"Similarity & Proving Triangles Similar AA, SSS, SAS", url:"https://www.youtube.com/embed/zuMqCVy1ygs?si=AyhvNkukdwO4iAOf"},
+      {id:9, title:"Right Triangle Trigonometry", url:"https://www.youtube.com/embed/u8mTh0k3CgU?si=uLOfiDxDd0DrSC9k"},
+      {id:10, title:"Circle Theorems", url:"https://www.youtube.com/embed/Jg0nOnRRCsQ?si=xGP9h3PqzwUBAvNf"},
+      {id:11, title:"Circumference, Area, Volume", url:"https://www.youtube.com/embed/0g_PhIHNi-I?si=_Z8IMgD4Lld8uGQD"},
+   ]
   }
 };
 
