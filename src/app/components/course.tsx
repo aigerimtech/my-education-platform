@@ -13,15 +13,14 @@ interface Course {
 }
 
 const coursesData: Course[] = [
-  { id: 1, name: 'Algebra Fundamentals', instructor: 'Dr. Alan Turing', rating: 4.8, duration: '3h 30m', price: 29.99, category: 'Math' },
-  { id: 2, name: 'Quantum Mechanics Basics', instructor: 'Dr. Niels Bohr', rating: 4.9, duration: '4h 15m', price: 39.99, category: 'Physics' },
-  { id: 3, name: 'Introduction to Programming with Python', instructor: 'Ada Lovelace', rating: 5.0, duration: '5h 45m', price: 49.99, category: 'IT' },
-  { id: 4, name: 'Calculus I', instructor: 'Isaac Newton', rating: 4.7, duration: '3h 20m', price: 19.99, category: 'Math' },
-  { id: 5, name: 'Artificial Intelligence Basics', instructor: 'Elon Musk', rating: 4.8, duration: '6h 10m', price: 59.99, category: 'IT' },
-  { id: 6, name: 'Classical Physics: Motion and Forces', instructor: 'Galileo Galilei', rating: 4.6, duration: '3h 10m', price: null, category: 'Physics' },
-  { id: 7, name: 'Data Structures and Algorithms', instructor: 'Donald Knuth', rating: 4.9, duration: '6h 45m', price: 49.99, category: 'IT' },
-  { id: 8, name: 'Geometry Mastery', instructor: 'Euclid', rating: 4.6, duration: '2h 50m', price: null, category: 'Math' },
-];
+  { id: 1, name: 'Algebra Fundamentals', instructor: 'Matantics', rating: 4.8, duration: '1h 43m', price: 29.99, category: 'Math' },
+  { id: 2, name: 'Quantum Mechanics Basics', instructor: 'Domain of Science', rating: 4.9, duration: '6h 20m', price: 39.99, category: 'Physics' },
+  { id: 3, name: 'Python for Beginners', instructor: 'Telusko', rating: 5.0, duration: '5h 45m', price: 49.99, category: 'IT' },
+  { id: 4, name: 'Calculus I', instructor: 'Dr. Trefor Bazett', rating: 4.7, duration: '4h 20m', price: 19.99, category: 'Math' },
+  { id: 5, name: 'Artificial Intelligence Basics', instructor: 'Gate Smashers', rating: 4.8, duration: '6h 10m', price: 59.99, category: 'IT' },
+  { id: 6, name: 'Data Structures and Algorithms', instructor: 'freeCodeCamp', rating: 4.9, duration: '6h 45m', price: 49.99, category: 'IT' },
+  { id: 7, name: 'Geometry Mastery', instructor: 'Mario Math', rating: 4.6, duration: '2h 50m', price: null, category: 'Math' },
+ ];
 
 const CourseList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -40,7 +39,7 @@ const CourseList: React.FC = () => {
       <div className="flex items-center mb-4">
         <input
           type="text"
-          className="w-[700px] h-[40px] text-black rounded-2xl px-2 py-1 mr-2"
+          className="w-[700px] h-[40px] text-black rounded-2xl ml-[20px] px-2 py-1 mr-2"
           placeholder="Search by course name or instructor"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
