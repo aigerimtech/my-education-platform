@@ -34,12 +34,12 @@ const CourseList: React.FC = () => {
 
   return (
     <div className="container mx-auto bg-slate-200 py-8">
-      <h1 className="text-3xl ml-[20px] font-bold text-black mb-6">Available Courses</h1>
+      <h1 className="text-3xl ml-[20px] font-bold text-black mb-6">Course Catalog</h1>
 
       <div className="flex items-center mb-4">
         <input
           type="text"
-          className="w-[700px] h-[40px] text-black rounded-2xl ml-[20px] px-2 py-1 mr-2"
+          className="w-[700px] h-[40px] text-black rounded-2xl ml-[10px] px-2 py-1 mr-2"
           placeholder="Search by course name or instructor"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

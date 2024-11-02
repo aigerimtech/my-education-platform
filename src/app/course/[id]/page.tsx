@@ -3,6 +3,8 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'; 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/app/context/AuthContext';
 
 const courseVideos: Record<number, {
   name: string;
@@ -181,6 +183,14 @@ const CoursePage = () => {
    const [selectedLecture, setSelectedLecture] = useState<string | null>(null);
    const [videoLoading, setVideoLoading] = useState(true); // Video loading state
    const pathname = usePathname();
+   const { isAuthenticated } = useAuth();
+   const { push } = useRouter();
+
+    useEffect(() => {
+        if (!isAuthenticated) push('/login'); // Redirect to login if not authenticated
+    }, [isAuthenticated, push]);
+
+    if (!isAuthenticated) return null; // Prevent rendering while redirecting
  
    useEffect(() => {
      const id = parseInt(pathname.split('/')[2]);

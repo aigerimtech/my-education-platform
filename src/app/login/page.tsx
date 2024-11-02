@@ -1,21 +1,28 @@
-'use client'
-import {useState} from 'react';
-import {useRouter} from 'next/navigation';
-import Navbar from '../components/navbar';
+'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../context/AuthContext';
 
-const Login: React.FC = () =>{
-    const router = useRouter();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const Login: React.FC = () => {
+  const { login, isAuthenticated } = useAuth();
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const handleLogin = (e: React.FormEvent)=> {
-        e.preventDefault();
-        console.log("Logging in with", email, password);
-        router.push('/dashboard');
-    };
+  // Redirect to dashboard if already authenticated
+  if (isAuthenticated) {
+    router.push('/dashboard');
+  }
 
-    return(
-        <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-white">
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Logging in with', email, password);
+    login(); 
+    router.push('/dashboard');
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-white">
       <div className="bg-slate-200 bg-opacity-90 rounded-lg shadow-lg p-8 w-96">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login</h2>
         <form onSubmit={handleLogin}>
@@ -51,7 +58,9 @@ const Login: React.FC = () =>{
 
         <p className="mt-4 text-center text-gray-600">
           Don't have an account?{' '}
-          <a href="/register" className="text-blue-600 hover:underline">Register</a>
+          <a href="/register" className="text-blue-600 hover:underline">
+            Register
+          </a>
         </p>
       </div>
     </div>
