@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect } from 'react';
 import Navbar from '@/app/components/navbar';
-import Course from '../components/course';
+import Course from '../components/courseList';
 import {useAuth} from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
 

@@ -8,6 +8,7 @@ const Login: React.FC = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Redirect to dashboard if already authenticated
   if (isAuthenticated) {
@@ -16,9 +17,13 @@ const Login: React.FC = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Logging in with', email, password);
-    login(); 
-    router.push('/dashboard');
+    const result = login(email, password);
+
+    if (result === 'Login successful') {
+      router.push('/dashboard');
+    } else {
+       setErrorMessage('You are not signed up to this platform!'); // Display error message
+    }
   };
 
   return (
@@ -63,6 +68,18 @@ const Login: React.FC = () => {
           </a>
         </p>
       </div>
+
+      {errorMessage && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="bg-red-500 text-white p-6 rounded-lg">
+          <p>{errorMessage}</p>
+          <button 
+            onClick={() => setErrorMessage(null)} 
+            className="mt-4 p-2 ml-24 bg-white text-red-500 rounded hover:bg-gray-200"
+          > Close </button>
+        </div>
+      </div>
+      )}
     </div>
   );
 };
