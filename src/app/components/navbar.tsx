@@ -74,7 +74,6 @@ const Navbar: React.FC = () => {
           isOpen={isPopupOpen}
           onClose={handleClosePopup}
           onLogout={handleLogout}
-          onSettings={handleSettings}
           user={{
             firstName: 'Aigerim',
             lastName: 'Seitzhan',
