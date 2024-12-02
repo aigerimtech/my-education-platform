@@ -20,37 +20,34 @@ interface Course {
 }
 
 interface StoreState {
-    user: User | null;
-    courses: Course[];
-    existingUsers: User[];
-    login: (user: User) => void;
-    logout: () => void;
-    buyCourse: (courseId: number) => string;
-    isCourseAccessible: (courseId: number) => boolean;
-  }
-  
-
-interface StoreState {
+  user: User | null;
   courses: Course[];
+  existingUsers: User[];
+  login: (user: User) => void;
+  logout: () => void;
+  buyCourse: (courseId: number) => string;
+  isCourseAccessible: (courseId: number) => boolean;
   addCourse: (newCourse: Course) => void;
   updateCourse: (id: number, updatedCourse: Partial<Course>) => void;
   removeCourse: (id: number) => void;
 }
 
+
 export const useStore = create<StoreState>((set, get) => ({
-    user: null,
+  user: null,
+  isAuthenticated: false,
     //List of existing users
     existingUsers: [
       { id: 1, name: 'John Doe', email: 'john.doe@example.com', password: '123456', balance: 100, enrolledCourses: [] },
-      { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com', password: 'abcdef', balance: 20, enrolledCourses: [1, 3] },
-      { id: 3, name: 'Alice Johnson', email: 'alice.johnson@example.com', password: 'alice123', balance: 50, enrolledCourses: [2] },
-      { id: 4, name: 'Bob Brown', email: 'bob.brown@example.com', password: 'bob@brown', balance: 300, enrolledCourses: [1, 4, 5] },
-      { id: 5, name: 'Clara Martinez', email: 'clara.martinez@example.com', password: 'clara789', balance: 150, enrolledCourses: [3, 6] },
+      { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com', password: 'abcdef', balance: 20, enrolledCourses: [] },
+      { id: 3, name: 'Alice Johnson', email: 'alice.johnson@example.com', password: 'alice123', balance: 50, enrolledCourses: [] },
+      { id: 4, name: 'Bob Brown', email: 'bob.brown@example.com', password: 'bob@brown', balance: 300, enrolledCourses: [] },
+      { id: 5, name: 'Clara Martinez', email: 'clara.martinez@example.com', password: 'clara789', balance: 150, enrolledCourses: [] },
       { id: 6, name: 'David Wilson', email: 'david.wilson@example.com', password: 'dwilson#12', balance: 120, enrolledCourses: [] },
-      { id: 7, name: 'Emily Davis', email: 'emily.davis@example.com', password: 'emily456', balance: 250, enrolledCourses: [2, 7] },
-      { id: 8, name: 'Frank Thomas', email: 'frank.thomas@example.com', password: 'frank000', balance: 400, enrolledCourses: [1, 5, 6, 7] },
+      { id: 7, name: 'Emily Davis', email: 'emily.davis@example.com', password: 'emily456', balance: 250, enrolledCourses: [] },
+      { id: 8, name: 'Frank Thomas', email: 'frank.thomas@example.com', password: 'frank000', balance: 40, enrolledCourses: [] },
       { id: 9, name: 'Grace Lee', email: 'grace.lee@example.com', password: 'grace2024', balance: 90, enrolledCourses: [] },
-      { id: 10, name: 'Henry Clark', email: 'henry.clark@example.com', password: 'henrypass', balance: 180, enrolledCourses: [3, 8] },
+      { id: 10, name: 'Henry Clark', email: 'henry.clark@example.com', password: 'henrypass', balance: 180, enrolledCourses: [] },
     ],    
 
     // Courses Data
@@ -68,21 +65,15 @@ export const useStore = create<StoreState>((set, get) => ({
     login: (credentials: { email: string; password: string }) => {
       const { existingUsers } = get(); // Access existing users from store
       const user = existingUsers.find(
-        (u) => u.email === credentials.email && u.password === credentials.password
-      );
-  
-      if (user) {
-        set({ user }); // Set the logged-in user
-        return 'Login successful';
-      } else {
+        (u) => u.email === credentials.email && u.password === credentials.password);
+        if(user){
+          set({user});
+          return 'Login successful';
+        }
         return 'Invalid email or password';
-      }
-    },
-  
-  
-    // Logout Method
-    logout: () => set({ user: null }),
-  
+      },
+      logout: () => set({user:null}),
+
     // Buy Course Method
     buyCourse: (courseId) => {
       const { user, courses } = get();
@@ -110,15 +101,21 @@ export const useStore = create<StoreState>((set, get) => ({
           alert ('Insufficient balance');
       }
 
-       // Deduct course price from balance and enroll user
-      set({
-        user: {
-          ...user,
-          balance: user.balance - course.price,
-          enrolledCourses: [...user.enrolledCourses, courseId],
-        },
-      });
-      return 'Course purchased successfully';
+      // Deduct balance, add course to enrolled courses
+    const updatedUser = {
+      ...user,
+      balance: user.balance - course.price,
+      enrolledCourses: [...user.enrolledCourses, courseId],
+    };
+
+    // Update store
+    set((state) => ({
+      user: updatedUser,
+      existingUsers: state.existingUsers.map((u) =>
+        u.id === user.id ? updatedUser : u
+      ),
+    }));
+    return 'Course purchased successfully';
     },
   
     // Check if Course is Accessible

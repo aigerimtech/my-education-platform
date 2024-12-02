@@ -1,13 +1,13 @@
 'use client';
 import React, { useState } from 'react';
-import ProfilePopup from './profile'; 
+import ProfilePopup from './profile';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../context/AuthContext';
+import { useStore } from '../store/useStore';
 
 const Navbar: React.FC = () => {
   const [searchItem, setSearchItem] = useState('');
   const [isPopupOpen, setPopupOpen] = useState(false); 
-  const { logout, isAuthenticated } = useAuth();
+  const logout = useStore((state) => state.logout); // Zustand logout method
   const router = useRouter();
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,20 +19,14 @@ const Navbar: React.FC = () => {
     setPopupOpen(true);
   };
 
-  const handleClosePopup = () => {
+  const handleCloseProfile = () => {
     setPopupOpen(false);
   };
-  
 
   const handleLogout = () => {
-    logout();
-    localStorage.clear(); 
-    router.push('/login');
-  }
-
-  const handleSettings = () => {
-    setPopupOpen(false);
-    router.push('/settings'); 
+    logout(); // Call Zustand's logout method
+    localStorage.clear(); // Optional: Clear any local storage if needed
+    router.push('/login'); // Redirect to login
   };
 
   return (
@@ -72,18 +66,12 @@ const Navbar: React.FC = () => {
       {isPopupOpen && (
         <ProfilePopup
           isOpen={isPopupOpen}
-          onClose={handleClosePopup}
+          onClose={handleCloseProfile}
           onLogout={handleLogout}
-          user={{
-            firstName: 'Aigerim',
-            lastName: 'Seitzhan',
-            email: 'aigerim.seitzhan@mail.com',
-          }}
         />
       )}
     </nav>
   );
 };
-
 
 export default Navbar;
