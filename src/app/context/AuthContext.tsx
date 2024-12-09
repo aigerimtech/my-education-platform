@@ -1,16 +1,6 @@
 'use client'
-import { createContext, useContext, useState, ReactNode } from 'react';
-import {useStore} from '../store/useStore'
-
-// Define the User interface
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  balance: number;
-  enrolledCourses: number[];
-}
+import { createContext, useContext, ReactNode } from 'react';
+import { useStore } from '../store/useStore';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -21,29 +11,18 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const {existingUsers} = useStore();
+  const { user, login: storeLogin, logout: storeLogout } = useStore();
 
   const login = (email: string, password: string): string => {
-    // Validate the user against existingUsers
-    const user = existingUsers.find(
-      (u) => u.email === email && u.password === password
-    );
-
-    if (user) {
-      setIsAuthenticated(true);
-      return 'Login successful';
-    } else {
-      return 'Invalid email or password';
-    }
+    return storeLogin({ email, password });
   };
 
   const logout = () => {
-    setIsAuthenticated(false);
+    storeLogout();
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated: !!user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -23,15 +23,15 @@ interface StoreState {
   user: User | null;
   courses: Course[];
   existingUsers: User[];
-  login: (user: User) => void;
+  login: (credentials: { email: string; password: string }) => string;
   logout: () => void;
   buyCourse: (courseId: number) => string;
   isCourseAccessible: (courseId: number) => boolean;
   addCourse: (newCourse: Course) => void;
   updateCourse: (id: number, updatedCourse: Partial<Course>) => void;
   removeCourse: (id: number) => void;
+  register: (newUser: User) => string;
 }
-
 
 export const useStore = create<StoreState>((set, get) => ({
   user: null,
@@ -49,6 +49,7 @@ export const useStore = create<StoreState>((set, get) => ({
       { id: 9, name: 'Grace Lee', email: 'grace.lee@example.com', password: 'grace2024', balance: 90, enrolledCourses: [] },
       { id: 10, name: 'Henry Clark', email: 'henry.clark@example.com', password: 'henrypass', balance: 180, enrolledCourses: [] },
     ],    
+    //currentUser:
 
     // Courses Data
     courses: [
@@ -62,7 +63,7 @@ export const useStore = create<StoreState>((set, get) => ({
     ],
   
     // Login Method
-    login: (credentials: { email: string; password: string }) => {
+    login: (credentials)=> {
       const { existingUsers } = get(); // Access existing users from store
       const user = existingUsers.find(
         (u) => u.email === credentials.email && u.password === credentials.password);
@@ -73,6 +74,19 @@ export const useStore = create<StoreState>((set, get) => ({
         return 'Invalid email or password';
       },
       logout: () => set({user:null}),
+
+      register: (newUser:User) => {
+        const { existingUsers } = get();
+        const emailExists = existingUsers.some(existingUser => existingUser.email === newUser.email);
+        if (emailExists) {
+          return 'Email is already registered';
+        }
+    
+        const userWithID = { ...newUser, id: existingUsers.length + 1, balance: 0, enrolledCourses: [] };
+        set({ existingUsers: [...existingUsers, userWithID] });
+        return 'Registration successful. Please log in now.';
+      },
+
 
     // Buy Course Method
     buyCourse: (courseId) => {
