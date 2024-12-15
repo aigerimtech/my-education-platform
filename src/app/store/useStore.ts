@@ -49,8 +49,7 @@ export const useStore = create<StoreState>((set, get) => ({
       { id: 9, name: 'Grace Lee', email: 'grace.lee@example.com', password: 'grace2024', balance: 90, enrolledCourses: [] },
       { id: 10, name: 'Henry Clark', email: 'henry.clark@example.com', password: 'henrypass', balance: 180, enrolledCourses: [] },
     ],    
-    //currentUser:
-
+    
     // Courses Data
     courses: [
       { id: 1, name: 'Algebra Fundamentals', instructor: 'Matantics', rating: 3.8, duration: '1h 43m', price: 29.99, category: 'Math' },

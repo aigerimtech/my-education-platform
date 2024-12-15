@@ -16,7 +16,7 @@ const Dashboard = () => {
     if (!isAuthenticated) return null; // Prevent rendering while redirecting
 
     return (
-        <div>
+        <div className='w-full max-w-screen-2xl mx-auto'>
             <Navbar />
             <Course />
         </div>

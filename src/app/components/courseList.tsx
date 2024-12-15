@@ -2,10 +2,13 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import FilterModal from './filter';
-import {useStore} from '../store/useStore'
+import { useStore } from '../store/useStore';
 
 const CourseList: React.FC = () => {
-  const courses = useStore((state) => state.courses); // Get courses from Zustand store
+  const courses = useStore((state) => state.courses); 
+  const buyCourse = useStore((state) => state.buyCourse); 
+  const user = useStore((state) => state.user);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [filters, setFilters] = useState({ price: '', rating: '', duration: '' });
@@ -47,16 +50,13 @@ const CourseList: React.FC = () => {
 
   // Handle course purchase
   const handlePurchase = (courseId: number) => {
-    const courseIdStr = courseId.toString(); // Convert to string
-    if (!purchasedCourses.includes(courseIdStr)) {
-      setPurchasedCourses([...purchasedCourses, courseIdStr]);
+    const result = buyCourse(courseId);
+    if (result === 'Course purchased successfully') {
       alert(`You have successfully purchased the course: ${courseId}`);
     } else {
-      alert('You have already purchased this course.');
+      alert(result); // Show error message if the purchase fails
     }
   };
-
-
 
   return (
     <div className="container mx-auto bg-slate-200 py-8">
@@ -97,12 +97,12 @@ const CourseList: React.FC = () => {
       </div>
 
       <FilterModal
-      isOpen={isModalOpen}
-      onClose={()=>setIsModalOpen(false)}
-      onSubmit={(newFilters) => {
-      setFilters(newFilters);
-      setIsModalOpen(false);
-      }}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={(newFilters) => {
+          setFilters(newFilters);
+          setIsModalOpen(false);
+        }}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -120,20 +120,23 @@ const CourseList: React.FC = () => {
               )}
 
               <div className="mt-4">
-                <Link href={`/course/${course.id}`} className="text-blue-500 hover:underline block">
-                  View Course
-                </Link>
-                <button
-                  onClick={() => handlePurchase(course.id)}
-                  className='bg-green-500 text-white px-4 py-2 rounded ml-2 text-sm'
-                >
-                  {purchasedCourses.includes(course.id.toString()) ? 'Already Purchased' : 'Buy Course'}
-                </button>
+                {user?.enrolledCourses.includes(course.id) ? (
+                  <Link href={`/course/${course.id}`} className="text-blue-500 hover:underline block">
+                    View Course
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => handlePurchase(course.id)}
+                    className="bg-green-500 text-white px-4 py-2 rounded ml-1 text-sm"
+                  >
+                    Buy Course
+                  </button>
+                )}
               </div>
             </div>
           ))
         ) : (
-          <p className="text-lg text-gray-500 col-span-full">No courses found.</p>
+          <p>No courses found.</p>
         )}
       </div>
     </div>
