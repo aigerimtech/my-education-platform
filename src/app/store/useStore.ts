@@ -31,6 +31,7 @@ interface StoreState {
   updateCourse: (id: number, updatedCourse: Partial<Course>) => void;
   removeCourse: (id: number) => void;
   register: (newUser: User) => string;
+  getBonusBalance: () => void;
 }
 
 export const useStore = create<StoreState>((set, get) => ({
@@ -111,8 +112,9 @@ export const useStore = create<StoreState>((set, get) => ({
 
       // Check for sufficient balance
       if (course.price > user.balance) {
-          alert ('Insufficient balance');
-      }
+        alert('Insufficient balance! Please check your profile to claim bonus balance.');
+        return 'Insufficient balance';
+    }
 
       // Deduct balance, add course to enrolled courses
     const updatedUser = {
@@ -130,6 +132,22 @@ export const useStore = create<StoreState>((set, get) => ({
     }));
     return 'Course purchased successfully';
     },
+    
+    getBonusBalance: () => {
+      const { user } = get();
+      if (!user) return; 
+    
+      if (user.balance === 0) {
+        const updatedUser = { ...user, balance: 100 };
+        set((state) => ({
+          user: updatedUser,
+          existingUsers: state.existingUsers.map((u) =>
+            u.id === user.id ? updatedUser : u
+          ),
+        }));
+      }
+    },
+    
   
     // Check if Course is Accessible
     isCourseAccessible: (courseId) => {

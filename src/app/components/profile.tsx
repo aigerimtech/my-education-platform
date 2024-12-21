@@ -9,7 +9,11 @@ type ProfilePopupProps = {
 };
 
 const ProfilePopup = ({ isOpen, onClose, onLogout}:ProfilePopupProps) => {
-  const user = useStore((state) => state.user);
+  const { user, getBonusBalance } = useStore((state) => ({
+    user: state.user,
+    getBonusBalance: state.getBonusBalance,
+  }));
+
   const popupRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(popupRef, onClose);
@@ -38,6 +42,16 @@ const ProfilePopup = ({ isOpen, onClose, onLogout}:ProfilePopupProps) => {
             ? user.enrolledCourses.join(', ')
             : 'None'}
         </p>
+
+        {/* //Conditional rendering for "Get $100" button
+        {user.balance === 0 && (
+          <button
+            onClick={getBonusBalance}
+            className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+          >
+            Get $100
+          </button>
+        )} */}
 
         <div className="mt-4 flex gap-4">
           <button
