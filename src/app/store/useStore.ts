@@ -135,16 +135,18 @@ export const useStore = create<StoreState>((set, get) => ({
     
     getBonusBalance: () => {
       const { user } = get();
-      if (!user) return; 
+      if (!user) return;
     
       if (user.balance === 0) {
-        const updatedUser = { ...user, balance: 100 };
-        set((state) => ({
-          user: updatedUser,
-          existingUsers: state.existingUsers.map((u) =>
-            u.id === user.id ? updatedUser : u
-          ),
-        }));
+        if (window.confirm("Your balance is 0. Would you like to receive a $100 bonus?")) {
+          const updatedUser = { ...user, balance: 100 };
+          set((state) => ({
+            user: updatedUser,
+            existingUsers: state.existingUsers.map((u) =>
+              u.id === user.id ? updatedUser : u
+            ),
+          }));
+        }
       }
     },
     

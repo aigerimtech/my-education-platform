@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useStore } from '../store/useStore';
 import { useClickOutside } from '../hooks/useClickOutside';
 
@@ -9,10 +9,8 @@ type ProfilePopupProps = {
 };
 
 const ProfilePopup = ({ isOpen, onClose, onLogout}:ProfilePopupProps) => {
-  const { user, getBonusBalance } = useStore((state) => ({
-    user: state.user,
-    getBonusBalance: state.getBonusBalance,
-  }));
+  const user = useStore(state=>state.user);
+  const getBonusBalance = useStore(state=>state.getBonusBalance);
 
   const popupRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +41,7 @@ const ProfilePopup = ({ isOpen, onClose, onLogout}:ProfilePopupProps) => {
             : 'None'}
         </p>
 
-        {/* //Conditional rendering for "Get $100" button
+        
         {user.balance === 0 && (
           <button
             onClick={getBonusBalance}
@@ -51,7 +49,7 @@ const ProfilePopup = ({ isOpen, onClose, onLogout}:ProfilePopupProps) => {
           >
             Get $100
           </button>
-        )} */}
+        )}
 
         <div className="mt-4 flex gap-4">
           <button
