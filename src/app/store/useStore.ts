@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 
 interface User {
     id: number;
@@ -34,7 +35,7 @@ interface StoreState {
   getBonusBalance: () => void;
 }
 
-export const useStore = create<StoreState>((set, get) => ({
+export const useStore = create<StoreState>()(devtools(persist((set, get) => ({
   user: null,
   isAuthenticated: false,
     //List of existing users
@@ -179,4 +180,4 @@ export const useStore = create<StoreState>((set, get) => ({
       set((state) => ({
         courses: state.courses.filter((course) => course.id !== id),
       })),
-  }));
+  }),{name:'user-storage'})));
