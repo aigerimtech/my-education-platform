@@ -24,8 +24,8 @@ const ContactPopup = ({ isOpen, onClose }: ContactPopupProps) => {
           Our team is here to assist you with any inquiries you may have regarding our courses, platform, or anything else.
         </p>
         <p className="mb-4">
-          <strong>KZ:</strong> +7 705 301 07 50<br />
-          <strong>TR:</strong> +90 506 514 75 86
+          <strong>KZ:</strong> +7 7777 333 44 55<br />
+          <strong>TR:</strong> +90 123 456 78 90
         </p>
         <div className="mt-4 flex justify-center">
           <button
